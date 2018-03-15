@@ -1,0 +1,83 @@
+\appendix
+\pagenumbering{Roman}
+\chapter{Appendices}
+
+\section{Queries File Format}
+\label{sec:queries_format}
+The keys of the top-level JSON object are the names of schemas contained in the database. The value of each schema's key is an array of query objects in the format described in Table \ref{tab:queries_json}.
+\begin{table}[tph]
+	\centering
+	\begin{tabulary}{\textwidth}{| l | l | L |}
+		\hline
+		\textbf{Key} & \textbf{Value type} & \textbf{Description} \\
+		\hline
+		\texttt{query} & String & SQL query string. Formatting (line breaks and tabulators) can be used by entering the corresponding control characters. \\
+		\hline
+		\texttt{description} & String & A description of the SQL query to be shown in the web application's front end. \\
+		\hline
+		\texttt{type} & String & Type of the word embedding operation contained in the query. One of \texttt{'analogy', 'analogy\_in', 'groups', 'similarity', 'knn', 'knn\_in', 'knn\_batch'} or \texttt{'custom'}. \\
+		\hline		
+	\end{tabulary}
+	\caption{A table containing a description of the query JSON format.}
+	\label{tab:queries_json}
+\end{table}
+
+\section{API}
+\label{sec:api-description}
+\begin{table}[bph]
+	\centering
+	\begin{tabulary}{\linewidth}{|l|l|L|}
+		\hline
+		\textbf{Property} & \textbf{Type} & \textbf{Description} \\
+		\hline
+		\texttt{index} & String & Index to use for word embedding operations: one of \texttt{'RAW'}, \texttt{'PQ'} and \texttt{'IVFADC'}. \\
+		\hline
+		\texttt{pv} & Boolean & Enable/disable post-verification. \\
+		\hline
+		\texttt{pvFactor} & Number & Factor for post-verification. \\
+		\hline
+		\texttt{wFactor} & Number & Factor for IVFADC index. \\
+		\hline
+		\texttt{analogyType} & String & Analogy implementation to use: one of \texttt{'analogy\_3cosadd'}, \texttt{'analogy\_pair\_direction'} and \texttt{'analogy\_3cosmul'}. \\
+		\hline
+		\texttt{we} & String & Word embeddings data set to use: one of \texttt{'Google News'}, \texttt{'Wikipedia'} and \texttt{'GloVe'}. \\
+		\hline
+	\end{tabulary}
+	\caption{A table containing a description of the settings JSON format.}
+	\label{tab:settings-format}
+\end{table}
+
+\begin{table}[tph]
+	\centering
+	\begin{tabulary}{\textwidth}{| l | l | l | L |}
+		\hline
+		\textbf{URL} & \textbf{HTTP Verb} & \textbf{Parameters} & \textbf{Action} \\
+		\hline
+		\texttt{/api/similarity} & GET & \texttt{keyword, results} & Execute a similarity query on keyword \texttt{keyword} with \texttt{results} number of results (only for IMDb data set). \\
+		\hline
+		\texttt{/api/knn} & GET & \texttt{query, k} & Find \texttt{k} nearest neighbors for word \texttt{query}. \\
+		\hline
+		\texttt{/api/knn\_batch} & GET & \texttt{query\_set, k} & Find \texttt{k} nearest neighbors for a list of words \texttt{query\_set}. \\
+		\hline
+		\texttt{/api/knn\_in} & GET & \texttt{query, k, input\_set} & Find \texttt{k} nearest neighbors for word \texttt{query}, searching only in \texttt{input\_set}. \\
+		\hline
+		\texttt{/api/analogy} & GET & \texttt{a, b, c} & Execute an analogy query with terms \texttt{a}, \texttt{b} and \texttt{c}. \\
+		\hline
+		\texttt{/api/analogy\_in} & GET & \texttt{w1, w2, w3, input\_set} & Execute an analogy query with terms \texttt{w1}, \texttt{w2} and \texttt{w3}, searching only in \texttt{input\_set}.\\
+		\hline
+		\texttt{/api/grouping} & GET & \texttt{tokens, groups} & Match a set of tokens \texttt{tokens} to a set of grouping tokens \texttt{groups}. \\
+		\hline
+		\texttt{/api/tables} & GET & \texttt{schema} & Fetch a list of tables, their columns and column data types for a schema \texttt{schema}. \\
+		\hline
+		\texttt{/api/custom\_query} & GET & \texttt{query} & Execute a custom user-defined query \texttt{query}. \\
+		\hline
+		\texttt{/api/settings} & POST & See Table \ref{tab:settings-format} & Apply settings in POST request body to the FREDDY database system. \\
+		\hline
+		\texttt{/api/test\_knn} & GET & \texttt{query\_number, k} & Execute a k-NN performance test with \texttt{query\_number} number of queries and parameter \texttt{k}. \\
+		\hline
+		\texttt{/api/prewarm} & GET & - & Load index tables into database server's main memory for improved performance. \\
+		\hline
+	\end{tabulary}
+	\caption{A table containing a description of the web application's back end's API.}
+	\label{tab:apitable}
+\end{table}

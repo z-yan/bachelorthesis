@@ -1,0 +1,97 @@
+\documentclass[english,
+				cdtitle=color,
+				numbers=noendperiod,
+				cdgeometry=twoside,
+				BCOR=5mm,
+				bibliography=totoc]{tudscrreprt}
+\usepackage{selinput}\SelectInputMappings{adieresis={ä},germandbls={ß}}				
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{isodate}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[toc,page]{appendix}
+\usepackage{graphicx}
+\usepackage{quoting}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabulary}
+\usepackage{hhline}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{csquotes}
+\usepackage[backend=biber,
+		maxbibnames=99,
+		sorting=none,
+		alldates=long,
+		dateabbrev=false]{biblatex}
+\usepackage[bottom]{footmisc}
+\usepackage[pdftex,
+			pdfauthor={Zdravko Yanakiev},
+			pdftitle={Developing a Web Front End for a Word-Embedding-Enabled Relational Database System},
+			hidelinks]{hyperref}
+\graphicspath{{img/}}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\addbibresource{thesis.bib}
+\begin{document}
+\lstset{basicstyle=\footnotesize\ttfamily}
+% General TUD options
+\faculty{Faculty of Computer Science}
+\institute{Institute of Systems Architecture}
+\chair{Chair of Databases}
+\author{Zdravko Yanakiev}
+\matriculationnumber{4037330}
+\matriculationyear{2014}
+\title{Developing a Web Front End for a Word-Embedding-Enabled Relational Database System}
+\thesis{bachelor}
+\graduation[B.Sc.]{Bachelor of Science}
+\dateofbirth{5.4.1995}
+\placeofbirth{Sofia}
+\date{10.7.2018}
+% Uncomment to print defense date:
+% \defensedate{24.7.2018}
+\supervisor{Dr.-Ing. Maik Thiele}
+\professor{Prof. Dr.-Ing. Wolfgang Lehner}
+% Make title page
+\maketitle
+\cleardoublepage
+% Abstract
+\pagenumbering{roman}
+\TUDoption{abstract}{chapter}
+\include{chapters/00_1_abstract}
+% Statement of authorship
+\TUDoption{declaration}{chapter}
+\renewcaptionname{english}{\confirmationname}{Statement of Authorship}
+\confirmation[pagestyle=plain]
+\cleardoublepage
+% Acknowledgements
+\include{chapters/00_2_acknowledgments}
+\cleardoublepage
+% Table of contents
+\tableofcontents
+% Lists of figures and tables
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
+\cleardoublepage
+% Introduction
+\include{chapters/01_introduction}
+% Fundamentals and State of the Art
+\include{chapters/02_fundamentals}
+% Use Cases and Requirements
+\include{chapters/03_usecase}
+% Implementation
+\include{chapters/04_implementation}
+% Evaluation
+\include{chapters/05_evaluation}
+% Conclusion
+\include{chapters/06_conclusion}
+% Bibliography
+\printbibliography
+% Appendices
+\cleardoublepage
+\include{chapters/07_appendices}
+\end{document}
